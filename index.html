@@ -1,0 +1,1231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BEES x O'Reilly | Learning Report</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --yellow: #FFBD00;
+    --yellow-light: #FFD966;
+    --yellow-dim: rgba(255,189,0,0.15);
+    --red: #D62027;
+    --red-dim: rgba(214,32,39,0.15);
+    --dark: #080808;
+    --charcoal: #111111;
+    --panel: #0F0F0F;
+    --border: rgba(255,189,0,0.18);
+    --border-subtle: rgba(255,189,0,0.08);
+    --text: #EFEFEF;
+    --muted: #888;
+    --accent-red: #D62027;
+    --accent-blue: #4A90D9;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--dark);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ─── CO-BRAND STRIP ─── */
+  .cobrand-strip {
+    background: var(--yellow);
+    padding: 10px 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .cobrand-strip .bees-wordmark {
+    font-family: 'Syne', sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    color: #000;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+  }
+
+  .cobrand-strip .bees-wordmark span {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background: #000;
+    border-radius: 50%;
+    margin: 0 2px;
+    vertical-align: middle;
+    position: relative;
+    top: -1px;
+  }
+
+  .cobrand-strip .oreilly-wordmark {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: #000;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .cobrand-strip .oreilly-wordmark img {
+    height: 28px;
+    width: auto;
+    display: block;
+  }
+
+  /* ─── HEADER ─── */
+  .header {
+    padding: 48px 64px 40px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    background: linear-gradient(180deg, rgba(255,189,0,0.03) 0%, transparent 100%);
+  }
+
+  .header-left .eyebrow {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--yellow);
+    margin-bottom: 12px;
+  }
+
+  .header-left h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 800;
+    line-height: 1.05;
+    color: #fff;
+  }
+
+  .header-left h1 span {
+    color: var(--yellow);
+  }
+
+  .header-left h1 span.red {
+    color: var(--red);
+  }
+
+  .header-right {
+    text-align: right;
+  }
+
+  .header-right .label {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+
+  .header-right .value {
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  /* ─── HERO STATEMENT ─── */
+  .hero-statement {
+    padding: 72px 64px;
+    max-width: 900px;
+  }
+
+  .hero-statement p {
+    font-size: clamp(18px, 2vw, 24px);
+    font-weight: 300;
+    line-height: 1.7;
+    color: rgba(239,239,239,0.85);
+  }
+
+  .hero-statement p strong {
+    color: #fff;
+    font-weight: 500;
+  }
+
+  .hero-statement p .highlight {
+    color: var(--yellow);
+    font-weight: 500;
+  }
+
+  .hero-statement p .highlight-red {
+    color: var(--red);
+    font-weight: 500;
+  }
+
+  /* ─── SECTION LABEL ─── */
+  .section-label {
+    padding: 0 64px;
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .section-label span {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--yellow);
+    white-space: nowrap;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ─── METRICS GRID ─── */
+  .metrics-section {
+    padding: 0 64px 80px;
+  }
+
+  .metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+
+  .metric-card {
+    background: var(--panel);
+    padding: 40px 32px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .metric-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: transparent;
+    transition: background 0.3s;
+  }
+
+  .metric-card:hover::before {
+    background: var(--yellow);
+  }
+
+  .metric-card .metric-label {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 16px;
+  }
+
+  .metric-card .metric-value {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(36px, 3vw, 52px);
+    font-weight: 800;
+    color: #fff;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .metric-card .metric-value.yellow { color: var(--yellow); }
+  .metric-card .metric-value.red { color: var(--accent-red); }
+
+  .metric-card .metric-sub {
+    font-size: 13px;
+    color: var(--muted);
+    font-weight: 400;
+  }
+
+  /* ─── TWO-COL PANELS ─── */
+  .two-col {
+    padding: 0 64px 80px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  .panel {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    padding: 40px;
+  }
+
+  .panel h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 8px;
+  }
+
+  .panel .panel-sub {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 32px;
+  }
+
+  /* ─── BAR CHART ─── */
+  .bar-chart { display: flex; flex-direction: column; gap: 14px; }
+  .bar-row { display: flex; align-items: center; gap: 12px; }
+
+  .bar-label {
+    font-size: 12px;
+    color: var(--muted);
+    width: 100px;
+    flex-shrink: 0;
+    text-align: right;
+  }
+
+  .bar-track {
+    flex: 1;
+    height: 8px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .bar-fill {
+    height: 100%;
+    border-radius: 2px;
+    animation: growBar 1.2s ease forwards;
+    transform-origin: left;
+    transform: scaleX(0);
+  }
+
+  @keyframes growBar {
+    to { transform: scaleX(1); }
+  }
+
+  .bar-val {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text);
+    width: 60px;
+    flex-shrink: 0;
+  }
+
+  /* ─── TIMELINE ─── */
+  .timeline-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 2px;
+    align-items: end;
+    height: 120px;
+    margin-bottom: 8px;
+  }
+
+  .timeline-bar {
+    background: rgba(255,189,0,0.12);
+    border-radius: 2px 2px 0 0;
+    position: relative;
+    transition: background 0.2s;
+  }
+
+  .timeline-bar.active {
+    background: rgba(255,189,0,0.5);
+  }
+
+  .timeline-bar.peak {
+    background: var(--yellow);
+    box-shadow: 0 0 24px rgba(255,189,0,0.35);
+  }
+
+  .timeline-labels {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 2px;
+  }
+
+  .timeline-labels span {
+    font-size: 10px;
+    color: var(--muted);
+    text-align: center;
+    letter-spacing: 0.5px;
+  }
+
+  .peak-marker {
+    font-size: 11px;
+    color: var(--yellow);
+    font-weight: 500;
+    margin-bottom: 4px;
+    text-align: center;
+  }
+
+  /* ─── EVENTS TABLE ─── */
+  .live-events {
+    padding: 0 64px 80px;
+  }
+
+  .events-table {
+    border: 1px solid var(--border);
+    overflow: hidden;
+  }
+
+  .events-table-header {
+    display: grid;
+    grid-template-columns: 2fr 180px 120px 120px;
+    background: rgba(255,189,0,0.06);
+    padding: 16px 24px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .events-table-header span {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--yellow);
+    font-weight: 500;
+  }
+
+  .event-row {
+    display: grid;
+    grid-template-columns: 2fr 180px 120px 120px;
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--border-subtle);
+    align-items: center;
+    transition: background 0.15s;
+  }
+
+  .event-row:hover { background: rgba(255,189,0,0.03); }
+  .event-row:last-child { border-bottom: none; }
+
+  .event-title-col .event-name {
+    font-size: 14px;
+    color: #fff;
+    font-weight: 400;
+    margin-bottom: 4px;
+    line-height: 1.4;
+  }
+
+  .ai-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--yellow);
+    background: rgba(255,189,0,0.1);
+    border: 1px solid rgba(255,189,0,0.25);
+    padding: 3px 8px;
+    border-radius: 2px;
+    margin-top: 4px;
+  }
+
+  .ai-badge::before {
+    content: '◆';
+    font-size: 7px;
+  }
+
+  .commerce-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--accent-blue);
+    background: rgba(74,144,217,0.1);
+    border: 1px solid rgba(74,144,217,0.25);
+    padding: 3px 8px;
+    border-radius: 2px;
+    margin-top: 4px;
+  }
+
+  .commerce-badge::before {
+    content: '●';
+    font-size: 7px;
+  }
+
+  .event-row .col-val {
+    font-family: 'Syne', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+  }
+
+  .event-row .col-sub {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+
+  /* ─── SKILLS ─── */
+  .skills-section {
+    padding: 0 64px 80px;
+  }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+
+  .skill-card {
+    background: var(--panel);
+    padding: 32px 28px;
+    position: relative;
+  }
+
+  .skill-number {
+    font-family: 'Syne', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    color: rgba(255,189,0,0.35);
+    margin-bottom: 12px;
+    letter-spacing: 2px;
+  }
+
+  .skill-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 6px;
+    line-height: 1.3;
+  }
+
+  .skill-meta {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 16px;
+  }
+
+  .skill-stat {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+  }
+
+  .skill-stat .num {
+    font-family: 'Syne', sans-serif;
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--yellow);
+  }
+
+  .skill-stat .unit {
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  .skill-tag {
+    position: absolute;
+    top: 24px; right: 24px;
+    font-size: 10px;
+    color: var(--yellow);
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .skill-tag.commerce {
+    color: var(--accent-blue);
+  }
+
+  /* ─── TOP LEARNERS ─── */
+  .learners-section {
+    padding: 0 64px 80px;
+  }
+
+  .learners-list {
+    border: 1px solid var(--border);
+  }
+
+  .learner-row {
+    display: grid;
+    grid-template-columns: 40px 1fr 100px 100px 100px 120px;
+    padding: 18px 24px;
+    border-bottom: 1px solid var(--border-subtle);
+    align-items: center;
+    transition: background 0.15s;
+  }
+
+  .learner-row:hover { background: rgba(255,189,0,0.03); }
+  .learner-row:last-child { border-bottom: none; }
+
+  .learner-row.header-row {
+    background: rgba(255,189,0,0.06);
+    padding: 12px 24px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .learner-row.header-row span {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--yellow);
+    font-weight: 500;
+  }
+
+  .rank {
+    font-family: 'Syne', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--muted);
+  }
+
+  .rank.top { color: var(--yellow); }
+
+  .learner-name {
+    font-size: 14px;
+    font-weight: 400;
+    color: #fff;
+  }
+
+  .learner-email {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+
+  .learner-val {
+    font-family: 'Syne', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  .learner-val.highlight { color: var(--yellow); }
+
+  /* ─── INSIGHTS ─── */
+  .insight-section {
+    padding: 0 64px 80px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  .insight-card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    padding: 40px;
+    border-left: 3px solid var(--yellow);
+  }
+
+  .insight-card.red-accent {
+    border-left-color: var(--red);
+  }
+
+  .insight-card .insight-eyebrow {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--yellow);
+    font-weight: 500;
+    margin-bottom: 16px;
+  }
+
+  .insight-card.red-accent .insight-eyebrow {
+    color: var(--red);
+  }
+
+  .insight-card p {
+    font-size: 15px;
+    line-height: 1.75;
+    color: rgba(239,239,239,0.8);
+  }
+
+  .insight-card p strong {
+    color: #fff;
+    font-weight: 500;
+  }
+
+  /* ─── BEES STATS BAND ─── */
+  .bees-band {
+    margin: 0 64px 80px;
+    background: var(--yellow);
+    padding: 40px 48px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+  }
+
+  .bees-band-stat {
+    padding: 0 32px;
+    border-right: 1px solid rgba(0,0,0,0.1);
+  }
+
+  .bees-band-stat:first-child { padding-left: 0; }
+  .bees-band-stat:last-child { border-right: none; }
+
+  .bees-band-stat .band-label {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(0,0,0,0.5);
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+
+  .bees-band-stat .band-val {
+    font-family: 'Syne', sans-serif;
+    font-size: 40px;
+    font-weight: 800;
+    color: #000;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .bees-band-stat .band-sub {
+    font-size: 13px;
+    color: rgba(0,0,0,0.55);
+    font-weight: 400;
+  }
+
+  /* ─── FOOTER ─── */
+  .footer {
+    padding: 40px 64px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer .footer-brand {
+    font-family: 'Syne', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--muted);
+    letter-spacing: 1px;
+  }
+
+  .footer .footer-brand strong {
+    color: var(--yellow);
+  }
+
+  .footer .footer-note {
+    font-size: 12px;
+    color: rgba(136,136,136,0.6);
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 1024px) {
+    .cobrand-strip,
+    .header, .metrics-section, .two-col, .live-events, .skills-section,
+    .learners-section, .insight-section, .hero-statement,
+    .section-label, .footer, .bees-band { padding-left: 32px; padding-right: 32px; }
+    .metrics-grid { grid-template-columns: repeat(2, 1fr); }
+    .two-col, .insight-section { grid-template-columns: 1fr; }
+    .skills-grid { grid-template-columns: repeat(2, 1fr); }
+    .events-table-header, .event-row { grid-template-columns: 1fr 100px 80px; }
+    .event-row .col-val:last-child, .events-table-header span:last-child { display: none; }
+    .learner-row { grid-template-columns: 40px 1fr 100px 100px; }
+    .learner-val:nth-child(5), .learner-row.header-row span:nth-child(5) { display: none; }
+    .bees-band { grid-template-columns: 1fr; gap: 24px; }
+    .bees-band-stat { padding: 0; border-right: none; border-bottom: 1px solid rgba(0,0,0,0.1); padding-bottom: 24px; }
+    .bees-band-stat:last-child { border-bottom: none; padding-bottom: 0; }
+  }
+</style>
+</head>
+<body>
+
+<!-- CO-BRAND STRIP -->
+<div class="cobrand-strip">
+  <div class="bees-wordmark">BEES</div>
+  <div class="oreilly-wordmark"><img src="https://cdn.oreillystatic.com/images/sitewide-headers/oreilly_logo_mark_red.svg" alt="O'Reilly"></div>
+</div>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-left">
+    <div class="eyebrow">O'Reilly Learning Platform</div>
+    <h1>BEES Engineering<br><span>Platform Engagement</span> <span class="red">Report</span></h1>
+  </div>
+  <div class="header-right">
+    <div class="label">Data Period</div>
+    <div class="value">October 2025 — February 2026</div>
+    <br>
+    <div class="label">Prepared For</div>
+    <div class="value">Henry Frank, Director of Engineering</div>
+  </div>
+</header>
+
+<!-- HERO STATEMENT -->
+<div class="hero-statement">
+  <p>
+    In October 2025, BEES engineers were invited to attend a <strong>custom live training series: AI for the Software Development Life Cycle.</strong> That was the only ask. No announcement was made about the broader O'Reilly platform, no self-study was mandated, no additional content was promoted. What happened next was entirely <span class="highlight">organic.</span>
+  </p>
+  <br>
+  <p>
+    Engineers went further — exploring books, videos, live events, and AI tools on their own terms. The data below captures that signal. It's not compliance. It's <strong>curiosity powering the platform that powers</strong> <span class="highlight">$53B in GMV.</span>
+  </p>
+</div>
+
+<!-- BEES PLATFORM STATS BAND -->
+<div class="bees-band">
+  <div class="bees-band-stat">
+    <div class="band-label">BEES GMV</div>
+    <div class="band-val">$53B</div>
+    <div class="band-sub">Gross merchandise value on platform</div>
+  </div>
+  <div class="bees-band-stat">
+    <div class="band-label">Orders Processed</div>
+    <div class="band-val">137M</div>
+    <div class="band-sub">Annual orders fulfilled via BEES</div>
+  </div>
+  <div class="bees-band-stat">
+    <div class="band-label">Sellers Enabled</div>
+    <div class="band-val">500+</div>
+    <div class="band-sub">Third-party sellers on the platform</div>
+  </div>
+</div>
+
+<!-- SECTION 01: KEY METRICS -->
+<div class="section-label"><span>01 — Platform Activity</span></div>
+<div class="metrics-section">
+  <div class="metrics-grid">
+    <div class="metric-card">
+      <div class="metric-label">Engaged Users</div>
+      <div class="metric-value yellow">58</div>
+      <div class="metric-sub">out of 125 max user seats</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Total Learning Sessions</div>
+      <div class="metric-value">559</div>
+      <div class="metric-sub">avg 9.64 sessions per user</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Avg Learning Days</div>
+      <div class="metric-value red">5.09</div>
+      <div class="metric-sub">days of active engagement per user</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Distinct Titles Consumed</div>
+      <div class="metric-value">231</div>
+      <div class="metric-sub">across video, books, live training & more</div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 02: ENGAGEMENT TRENDS -->
+<div class="section-label"><span>02 — Engagement Peak</span></div>
+<div class="two-col">
+  <div class="panel">
+    <h3>Monthly Engaged Users</h3>
+    <div class="panel-sub">Platform activity from April 2025 through February 2026</div>
+
+    <div style="margin-bottom: 6px;">
+      <div class="peak-marker">▲ Peak: October 2025 — 41 users</div>
+    </div>
+
+    <div class="timeline-grid" style="align-items:end;">
+      <div class="timeline-bar" style="height:7%;" title="Apr: 3"></div>
+      <div class="timeline-bar" style="height:5%;" title="Jun: 2"></div>
+      <div class="timeline-bar" style="height:2%;" title="Jul: 1"></div>
+      <div class="timeline-bar" style="height:5%;" title="Sep: 2"></div>
+      <div class="timeline-bar peak" style="height:100%;" title="Oct: 41"></div>
+      <div class="timeline-bar active" style="height:71%;" title="Nov: 29"></div>
+    </div>
+    <div class="timeline-labels" style="margin-bottom:16px;">
+      <span>APR</span><span>JUN</span><span>JUL</span><span>SEP</span><span>OCT★</span><span>NOV</span>
+    </div>
+    <div class="timeline-grid" style="align-items:end; height:60px;">
+      <div class="timeline-bar active" style="height:37%;" title="Dec: 15"></div>
+      <div class="timeline-bar active" style="height:29%;" title="Jan: 12"></div>
+      <div class="timeline-bar" style="height:2%;" title="Feb: 1"></div>
+      <div></div><div></div><div></div>
+    </div>
+    <div class="timeline-labels">
+      <span>DEC</span><span>JAN</span><span>FEB</span><span></span><span></span><span></span>
+    </div>
+
+    <div style="margin-top:24px; padding-top:24px; border-top:1px solid var(--border);">
+      <p style="font-size:13px; color:var(--muted); line-height:1.7;">The custom live training event launched in October. <strong style="color:var(--text);">Engagement didn't stop there</strong> — BEES engineers continued active self-directed learning through January 2026, three months after the event concluded.</p>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h3>Format Breakdown</h3>
+    <div class="panel-sub">Units viewed by content type — zero format mandated</div>
+
+    <div class="bar-chart">
+      <div class="bar-row">
+        <span class="bar-label">Video</span>
+        <div class="bar-track">
+          <div class="bar-fill" style="width:100%; background:var(--yellow); animation-delay:0.1s;"></div>
+        </div>
+        <span class="bar-val">3,748</span>
+      </div>
+      <div class="bar-row">
+        <span class="bar-label">Book</span>
+        <div class="bar-track">
+          <div class="bar-fill" style="width:88%; background:var(--accent-blue); animation-delay:0.2s;"></div>
+        </div>
+        <span class="bar-val">3,314</span>
+      </div>
+      <div class="bar-row">
+        <span class="bar-label">Live Training</span>
+        <div class="bar-track">
+          <div class="bar-fill" style="width:44%; background:var(--red); animation-delay:0.3s;"></div>
+        </div>
+        <span class="bar-val">1,650</span>
+      </div>
+      <div class="bar-row">
+        <span class="bar-label">Audiobook</span>
+        <div class="bar-track">
+          <div class="bar-fill" style="width:8%; background:rgba(255,189,0,0.35); animation-delay:0.4s;"></div>
+        </div>
+        <span class="bar-val">285</span>
+      </div>
+    </div>
+
+    <div style="margin-top:32px; display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+      <div>
+        <div style="font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--muted); margin-bottom:6px;">AI-Related Units</div>
+        <div style="font-family:'Syne',sans-serif; font-size:32px; font-weight:800; color:var(--yellow);">5,609</div>
+        <div style="font-size:12px; color:var(--muted);">62% of all units viewed</div>
+      </div>
+      <div>
+        <div style="font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--muted); margin-bottom:6px;">AI Sessions</div>
+        <div style="font-family:'Syne',sans-serif; font-size:32px; font-weight:800; color:var(--yellow);">265</div>
+        <div style="font-size:12px; color:var(--muted);">47% of all learning sessions</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 03: LIVE EVENTS -->
+<div class="section-label"><span>03 — Live Event Attendance</span></div>
+<div class="live-events">
+  <div style="margin-bottom:20px; max-width:700px;">
+    <p style="font-size:14px; color:var(--muted); line-height:1.7;">Beyond the custom SDLC series, BEES engineers independently registered for and attended <strong style="color:var(--text);">17 distinct live online training events</strong> generating 1,650 total attendance units. AI-flagged events highlight engineers proactively deepening skills that directly map to BEES' AI-powered commerce roadmap.</p>
+  </div>
+  <div class="events-table">
+    <div class="events-table-header">
+      <span>Event Title</span>
+      <span>Skill Area</span>
+      <span>Users</span>
+      <span>Units Viewed</span>
+    </div>
+
+    <div class="event-row">
+      <div class="event-title-col">
+        <div class="event-name">Designing Distributed Systems</div>
+        <div class="commerce-badge">Commerce Platform</div>
+      </div>
+      <div><div class="col-val" style="font-size:13px; font-family:'DM Sans';">Distributed Systems</div></div>
+      <div><div class="col-val">1</div><div class="col-sub">attendee</div></div>
+      <div><div class="col-val">238.1</div><div class="col-sub">units</div></div>
+    </div>
+
+    <div class="event-row">
+      <div class="event-title-col">
+        <div class="event-name">AI Agents at Work</div>
+        <div class="ai-badge">AI Initiative</div>
+      </div>
+      <div><div class="col-val" style="font-size:13px; font-family:'DM Sans';">Generative AI</div></div>
+      <div><div class="col-val">1</div><div class="col-sub">attendee</div></div>
+      <div><div class="col-val">237.9</div><div class="col-sub">units</div></div>
+    </div>
+
+    <div class="event-row">
+      <div class="event-title-col">
+        <div class="event-name">System Design Interview Boot Camp</div>
+        <div class="commerce-badge">Commerce Platform</div>
+      </div>
+      <div><div class="col-val" style="font-size:13px; font-family:'DM Sans';">Software Architecture</div></div>
+      <div><div class="col-val">1</div><div class="col-sub">attendee</div></div>
+      <div><div class="col-val">237.1</div><div class="col-sub">units</div></div>
+    </div>
+
+    <div class="event-row">
+      <div class="event-title-col">
+        <div class="event-name">Live with Tim O'Reilly: Conversation with Kent Beck</div>
+      </div>
+      <div><div class="col-val" style="font-size:13px; font-family:'DM Sans';">Coding Practices</div></div>
+      <div><div class="col-val">2</div><div class="col-sub">attendees</div></div>
+      <div><div class="col-val">153.1</div><div class="col-sub">units</div></div>
+    </div>
+
+    <div class="event-row">
+      <div class="event-title-col">
+        <div class="event-name">Communication Styles for Distributed Architectures</div>
+        <div class="commerce-badge">Commerce Platform</div>
+      </div>
+      <div><div class="col-val" style="font-size:13px; font-family:'DM Sans';">Microservices</div></div>
+      <div><div class="col-val">1</div><div class="col-sub">attendee</div></div>
+      <div><div class="col-val">146.7</div><div class="col-sub">units</div></div>
+    </div>
+
+    <div class="event-row">
+      <div class="event-title-col">
+        <div class="event-name">How to Prompt Like a Pro</div>
+        <div class="ai-badge">AI Initiative</div>
+      </div>
+      <div><div class="col-val" style="font-size:13px; font-family:'DM Sans';">Generative AI</div></div>
+      <div><div class="col-val">1</div><div class="col-sub">attendee</div></div>
+      <div><div class="col-val">120.3</div><div class="col-sub">units</div></div>
+    </div>
+
+    <div class="event-row">
+      <div class="event-title-col">
+        <div class="event-name">Build AI Agents from Existing APIs with MCP</div>
+        <div class="ai-badge">AI Initiative</div>
+      </div>
+      <div><div class="col-val" style="font-size:13px; font-family:'DM Sans';">Generative AI</div></div>
+      <div><div class="col-val">1</div><div class="col-sub">attendee</div></div>
+      <div><div class="col-val">114.4</div><div class="col-sub">units</div></div>
+    </div>
+
+    <div class="event-row">
+      <div class="event-title-col">
+        <div class="event-name">Live with Tim O'Reilly: Anjali Shrivastava on AI Research</div>
+        <div class="ai-badge">AI Initiative</div>
+      </div>
+      <div><div class="col-val" style="font-size:13px; font-family:'DM Sans';">Artificial Intelligence</div></div>
+      <div><div class="col-val">3</div><div class="col-sub">attendees</div></div>
+      <div><div class="col-val">114.3</div><div class="col-sub">units</div></div>
+    </div>
+
+    <div class="event-row">
+      <div class="event-title-col">
+        <div class="event-name">Cursor for Software Engineers</div>
+      </div>
+      <div><div class="col-val" style="font-size:13px; font-family:'DM Sans';">Coding Practices</div></div>
+      <div><div class="col-val">1</div><div class="col-sub">attendee</div></div>
+      <div><div class="col-val">84.5</div><div class="col-sub">units</div></div>
+    </div>
+
+    <div class="event-row">
+      <div class="event-title-col">
+        <div class="event-name">GenAI Superstream: Agentic Workflows</div>
+        <div class="ai-badge">AI Initiative</div>
+      </div>
+      <div><div class="col-val" style="font-size:13px; font-family:'DM Sans';">Generative AI</div></div>
+      <div><div class="col-val">1</div><div class="col-sub">attendee</div></div>
+      <div><div class="col-val">40.2</div><div class="col-sub">units</div></div>
+    </div>
+
+    <div class="event-row">
+      <div class="event-title-col">
+        <div class="event-name">Generative AI for Software Testing</div>
+        <div class="ai-badge">AI Initiative</div>
+      </div>
+      <div><div class="col-val" style="font-size:13px; font-family:'DM Sans';">Generative AI</div></div>
+      <div><div class="col-val">1</div><div class="col-sub">attendee</div></div>
+      <div><div class="col-val">38.7</div><div class="col-sub">units</div></div>
+    </div>
+
+    <div style="background:rgba(255,189,0,0.04); padding:16px 24px; display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--border);">
+      <span style="font-size:12px; color:var(--muted);">6 of 11 live events directly support the AI initiative powering BEES</span>
+      <div style="display:flex; gap:32px;">
+        <div>
+          <div style="font-size:10px; letter-spacing:2px; color:var(--yellow); text-transform:uppercase;">AI Events</div>
+          <div style="font-family:'Syne',sans-serif; font-size:20px; font-weight:800; color:var(--yellow);">6</div>
+        </div>
+        <div>
+          <div style="font-size:10px; letter-spacing:2px; color:var(--muted); text-transform:uppercase;">Total Live Events</div>
+          <div style="font-family:'Syne',sans-serif; font-size:20px; font-weight:800; color:#fff;">17</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 04: TOP SKILLS -->
+<div class="section-label"><span>04 — Skills Attained</span></div>
+<div class="skills-section">
+  <div style="margin-bottom:20px; max-width:700px;">
+    <p style="font-size:14px; color:var(--muted); line-height:1.7;">Every unit consumed maps to a verifiable skill. These are the areas BEES engineers built depth in — all self-directed, all within the same platform where the custom SDLC training lived.</p>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <div class="skill-tag">AI Initiative</div>
+      <div class="skill-number">01</div>
+      <div class="skill-name">Generative AI</div>
+      <div class="skill-meta">Video + Book + Live Training</div>
+      <div class="skill-stat"><span class="num">4,134</span><span class="unit">units viewed</span></div>
+      <div style="font-size:12px; color:var(--muted); margin-top:4px;">32 distinct users</div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-tag">AI Initiative</div>
+      <div class="skill-number">02</div>
+      <div class="skill-name">Artificial Intelligence (AI)</div>
+      <div class="skill-meta">Book + Live Training</div>
+      <div class="skill-stat"><span class="num">566</span><span class="unit">units viewed</span></div>
+      <div style="font-size:12px; color:var(--muted); margin-top:4px;">11 distinct users</div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-tag commerce">Commerce Platform</div>
+      <div class="skill-number">03</div>
+      <div class="skill-name">Distributed Systems</div>
+      <div class="skill-meta">Live Online Training</div>
+      <div class="skill-stat"><span class="num">238</span><span class="unit">units viewed</span></div>
+      <div style="font-size:12px; color:var(--muted); margin-top:4px;">1 distinct user</div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-tag commerce">Commerce Platform</div>
+      <div class="skill-number">04</div>
+      <div class="skill-name">Software Architecture</div>
+      <div class="skill-meta">Live Online Training + Book</div>
+      <div class="skill-stat"><span class="num">320</span><span class="unit">units viewed</span></div>
+      <div style="font-size:12px; color:var(--muted); margin-top:4px;">6 distinct users</div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-number">05</div>
+      <div class="skill-name">Engineering Leadership</div>
+      <div class="skill-meta">Book</div>
+      <div class="skill-stat"><span class="num">320</span><span class="unit">units viewed</span></div>
+      <div style="font-size:12px; color:var(--muted); margin-top:4px;">6 distinct users</div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-number">06</div>
+      <div class="skill-name">Python</div>
+      <div class="skill-meta">Video</div>
+      <div class="skill-stat"><span class="num">551</span><span class="unit">units viewed</span></div>
+      <div style="font-size:12px; color:var(--muted); margin-top:4px;">3 distinct users</div>
+    </div>
+  </div>
+
+  <div style="margin-top:1px; background:var(--panel); border:1px solid var(--border); border-top:none; padding:24px 28px; display:flex; gap:48px;">
+    <div>
+      <div style="font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--yellow); margin-bottom:6px;">AI-Skill Titles</div>
+      <div style="font-family:'Syne',sans-serif; font-size:28px; font-weight:800; color:#fff;">67</div>
+      <div style="font-size:12px; color:var(--muted);">distinct AI-related titles consumed</div>
+    </div>
+    <div>
+      <div style="font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--yellow); margin-bottom:6px;">Total Titles</div>
+      <div style="font-family:'Syne',sans-serif; font-size:28px; font-weight:800; color:#fff;">231</div>
+      <div style="font-size:12px; color:var(--muted);">unique titles accessed across the platform</div>
+    </div>
+    <div>
+      <div style="font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--yellow); margin-bottom:6px;">Content Levels</div>
+      <div style="font-family:'Syne',sans-serif; font-size:28px; font-weight:800; color:#fff;">4</div>
+      <div style="font-size:12px; color:var(--muted);">beginner through intermediate/advanced</div>
+    </div>
+    <div>
+      <div style="font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--yellow); margin-bottom:6px;">AI of Total Units</div>
+      <div style="font-family:'Syne',sans-serif; font-size:28px; font-weight:800; color:var(--yellow);">62%</div>
+      <div style="font-size:12px; color:var(--muted);">of all units tied to AI skills</div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 05: TOP LEARNERS -->
+<div class="section-label"><span>05 — Top Learners</span></div>
+<div class="learners-section">
+  <div style="margin-bottom:20px; max-width:700px;">
+    <p style="font-size:14px; color:var(--muted); line-height:1.7;">These users went well beyond the live event. They are your internal champions — the BEES engineers most likely to drive peer adoption and model AI-forward behavior for the broader team.</p>
+  </div>
+  <div class="learners-list">
+    <div class="learner-row header-row">
+      <span>#</span>
+      <span>Name</span>
+      <span>Learning Days</span>
+      <span>Titles</span>
+      <span>Units Viewed</span>
+      <span>Last Active</span>
+    </div>
+    <div class="learner-row">
+      <div class="rank top">01</div>
+      <div><div class="learner-name">Rodrigo Estrela</div></div>
+      <div class="learner-val highlight">43</div>
+      <div class="learner-val">36</div>
+      <div class="learner-val">1,813</div>
+      <div class="learner-val" style="font-size:12px; color:var(--muted); font-family:'DM Sans';">Feb 4, 2026</div>
+    </div>
+    <div class="learner-row">
+      <div class="rank top">02</div>
+      <div><div class="learner-name">Patricia Areias</div></div>
+      <div class="learner-val highlight">17</div>
+      <div class="learner-val">20</div>
+      <div class="learner-val">775</div>
+      <div class="learner-val" style="font-size:12px; color:var(--muted); font-family:'DM Sans';">Jan 30, 2026</div>
+    </div>
+    <div class="learner-row">
+      <div class="rank top">03</div>
+      <div><div class="learner-name">Gustavo Mendonca</div></div>
+      <div class="learner-val">8</div>
+      <div class="learner-val">7</div>
+      <div class="learner-val">740</div>
+      <div class="learner-val" style="font-size:12px; color:var(--muted); font-family:'DM Sans';">Dec 10, 2025</div>
+    </div>
+    <div class="learner-row">
+      <div class="rank">04</div>
+      <div><div class="learner-name">Bruno Missio</div></div>
+      <div class="learner-val">5</div>
+      <div class="learner-val">9</div>
+      <div class="learner-val">552</div>
+      <div class="learner-val" style="font-size:12px; color:var(--muted); font-family:'DM Sans';">Jan 7, 2026</div>
+    </div>
+    <div class="learner-row">
+      <div class="rank">05</div>
+      <div><div class="learner-name">Rodrigo Fernandes</div></div>
+      <div class="learner-val">13</div>
+      <div class="learner-val">20</div>
+      <div class="learner-val">596</div>
+      <div class="learner-val" style="font-size:12px; color:var(--muted); font-family:'DM Sans';">Nov 7, 2025</div>
+    </div>
+
+    <div style="padding:16px 24px; background:rgba(255,189,0,0.03); border-top:1px solid var(--border); display:flex; gap:32px; flex-wrap:wrap;">
+      <div>
+        <div style="font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--muted); margin-bottom:4px;">Users with 5+ Learning Days</div>
+        <div style="font-family:'Syne',sans-serif; font-size:22px; font-weight:800; color:var(--yellow);">22</div>
+      </div>
+      <div>
+        <div style="font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--muted); margin-bottom:4px;">Highest Single-User Days</div>
+        <div style="font-family:'Syne',sans-serif; font-size:22px; font-weight:800; color:var(--yellow);">43</div>
+      </div>
+      <div>
+        <div style="font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--muted); margin-bottom:4px;">Users Still Active Jan 2026</div>
+        <div style="font-family:'Syne',sans-serif; font-size:22px; font-weight:800; color:#fff;">12+</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 06: KEY INSIGHTS -->
+<div class="section-label"><span>06 — What This Means for BEES</span></div>
+<div class="insight-section">
+  <div class="insight-card">
+    <div class="insight-eyebrow">Organic Signal</div>
+    <p>
+      BEES engineers were told one thing: attend the AI for the SDLC live series. The platform data shows they did far more — browsing books on prompt engineering, joining external live events on AI agents and distributed systems, and returning to the platform for months after the event ended. <strong>That is not compliance. That is genuine learning intent.</strong>
+    </p>
+  </div>
+  <div class="insight-card">
+    <div class="insight-eyebrow">AI Depth Aligned to BEES</div>
+    <p>
+      62% of all units consumed were tied to AI or Generative AI skills — skills that map directly to BEES' stated mission of <strong>AI-powered smarter commerce.</strong> Engineers explored 67 distinct AI-related titles spanning video, books, and live events, all in one centralized environment — no second login, no separate subscription.
+    </p>
+  </div>
+  <div class="insight-card red-accent">
+    <div class="insight-eyebrow">Platform Architecture Investment</div>
+    <p>
+      Distributed systems, software architecture, and microservices appeared organically in the top skills consumed — subjects that map directly to the infrastructure powering <strong>137M annual orders</strong> on the BEES platform. This isn't coincidental; it's engineers sharpening the skills the platform demands.
+    </p>
+  </div>
+  <div class="insight-card red-accent">
+    <div class="insight-eyebrow">One Platform, Full Coverage</div>
+    <p>
+      The variety of formats consumed — video, books, live training, audiobooks — shows that BEES engineers are using O'Reilly as a <strong>comprehensive learning environment</strong>, not just an event delivery tool. Every question they have, every skill they want to deepen, lives in the same place as the custom training.
+    </p>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-brand" style="display:flex;align-items:center;gap:12px;"><strong>BEES</strong> <span style="color:rgba(136,136,136,0.4);">×</span> <img src="https://cdn.oreillystatic.com/images/sitewide-headers/oreilly_logo_mark_red.svg" alt="O'Reilly" style="height:20px;width:auto;opacity:0.6;"></div>
+  <div class="footer-note">Data reflects account activity through February 2026. Contract: 03/12/2025 — 09/11/2027.</div>
+</footer>
+
+</body>
+</html>
